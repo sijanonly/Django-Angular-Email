@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% load staticfiles i18n %} {% load i18n %} {% load crispy_forms_tags %} {% block css %} {{ block.super }}
+
+{% endblock %} {% block content %}
+<p>Inbox</p>
+{% verbatim %}
+<div class="row row-content" ng-app='emailApp'>
+    <div ng-controller="EmailController">
+       
+    </div>
+</div>
+{% endverbatim %} {% endblock content %} 
+
+{% block javascript %} {{ block.super }}
+
+<script src="{% static 'js/email/app.js' %}"></script>
+<script src="{% static 'js/email/services.js' %}"></script>
+<script src="{% static 'js/email/controllers.js' %}"></script>
+{% endblock javascript %}

@@ -1,0 +1,47 @@
+<div class="email-container" ng-controller="EmailController">
+
+    <div class="col-sm-3 col-md-2">   
+        <div class="email-inbox-leftbar">
+            <ul class="nav nav-pills nav-stacked">
+                <li ng-class="{active: inbox==true }">
+                    <a class="nav-link" href="#/inbox">Inbox</a>
+                </li>
+                <li ng-class="{active: sent==true }" class="nav-item">
+                    <a class="nav-link" href="#/sent">
+                    Sent Mail</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-9 col-md-10">
+        <div class="row">
+        <div class="col-sm-3 col-md-2 pull-right">
+            <div class="email-compose">
+                <a href="#" class="btn btn-danger btn-sm btn-block pull-right" role="button" ng-click="open()">COMPOSE</a>
+            </div>
+        </div>
+        </div>
+        <div class="email-list">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#email_list"></a>
+                </li>
+            </ul>
+            <div class="">
+                <center ng-show="loading">
+                    <i class="fa fa-spinner fa-spin fa-5x"></i>
+                </center>
+                <div role="tabpanel" class="tab-pane fade in active" id="email_list">
+                    <ul class="list-group">
+                        <a ng-class="{emailOpened: email.is_opened==true }" ng-repeat="email in emails | orderBy:'email.created':true " ng-click="openEmail(email)" class="list-group-item email-item">
+
+                            <span class="name" style="min-width: 120px;
+  display: inline-block;">{{email.sender.username}}</span> <span class="">{{email.msg_header}}</span>
+                            <span class="text-muted" style="font-size: 11px;">- {{email.msg_content}}</span> <span class=" pull-right">{{email.created | date}}</span>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

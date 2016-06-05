@@ -1,0 +1,52 @@
+<div class="" style="min-height:450px; padding:20px;">
+    <form class="form-horizontal" name="replyForm" ng-submit="submitReply()" novalidate>
+        <section class="col-sm-12 ">
+            <!-- quick email widget -->
+            <div class="box box-info">
+                <div class="box-header">
+                    <div class="form-group">
+                        <h3 class="box-title">Email</h3>
+                        <!-- tools box -->
+                        <!-- /. tools -->
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="form-group">
+                        <ui-select multiple ng-model="users.selected" required>
+                            <ui-select-match placeholder="Select person...">
+                                {{$item.username}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in (users.data | filter: $select.search) track by item.id">
+                                <span ng-bind-html="item.username"></span>
+                                <small ng-bind-html="item.email"></small>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="form-group">
+                        <div class="">
+                            <input type="text" id="bulk-msg-header" class="form-control" ng-model="email.msg_header" name="subject1" placeholder="Bulk Subject" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="">
+                            <textarea class="textarea" ng-model="email.msg_content" placeholder="Message" style="width: 100%; height: 180px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" required></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="">
+                            <button type="submit" class=" btn btn-primary" id="sendEmail" ng-disabled="replyForm.$invalid">Send <i class="fa fa-arrow-circle-right"></i></button>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="">
+                            <button class="pull-right btn btn-danger" id="cancelEmail" ng-click="cancel()">Cancel<i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+</div>

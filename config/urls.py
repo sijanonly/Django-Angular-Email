@@ -18,6 +18,8 @@ urlpatterns = [
     # User management
     url(r'^users/', include('django_angular_email.users.urls', namespace='users')),
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^email/', include(
+        'emailapp.urls', namespace="user_email")),
 
     # Your stuff: custom urls includes go here
 

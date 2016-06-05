@@ -1,0 +1,28 @@
+
+    <div class="" style="min-height:350px; padding:20px;">
+    	<div class="row email-header">
+    		
+			<div class="col-sm-6"><h5>{{email.msg_header}}</h5></div>			    		
+			<div class="col-sm-6">
+			<button type="button" class="close pull-right" ng-click="cancel()" data-dismiss="email" aria-hidden="true" >&times;</button></div>
+    	</div>
+    	
+    	 <div class=" email-body" style="min-height:250px;">
+            
+            <strong>From:</strong> {{email.sender.username}}<br />
+            
+            <strong>Date:</strong> {{email.created | date}}<br />
+            <br />
+            {{email.msg_content}}
+        </div>
+        
+         <div class=" row email-footer">
+         <div class="col-sm-4 pull-right">
+         <div class="pull-right">
+            <a href="#" class="btn" ng-click="openEmailReply(email)" >Reply</a>
+             <button class="pull-right btn btn-danger" id="cancelEmail" ng-click="cancel()">Cancel<i class="fa fa-times"></i>
+</button>
+          </div>
+         </div>
+        </div>
+    </div>

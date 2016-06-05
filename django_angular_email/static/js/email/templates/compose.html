@@ -1,0 +1,170 @@
+<div class="" style="min-height:450px; padding:20px;">
+    
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item active" role="presentation">
+                <a class="nav-link " href="#single_compose" aria-controls="single_compose" role="tab" data-toggle="tab">Single Compose</a></li>
+            <li class="nav-item" role="presentation"><a class="nav-link" href="#bulk_compose" aria-controls="bulk_compose" role="tab" data-toggle="tab">Bulk Compose</a></li>
+        </ul>
+
+        <div class="tab-content">
+        
+            <div role="tabpanel" class="tab-pane fade in active" id="single_compose" style="">
+
+            <div class="row">
+             <form class="form-horizontal" name="emailForm" ng-submit="submitEmail()" novalidate>
+                    <section class="col-sm-8 connectedSortable">
+                        <!-- quick email widget -->
+                        <div class="box box-info">
+                            <div class="box-header">
+                                <div class="form-group">
+                                    <h3 class="box-title">Email </h3>
+                                    <!-- tools box -->
+                                    <!-- /. tools -->
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <ui-select required ng-model="email.group" on-select="onSelected($item)">
+                                        <ui-select-match placeholder="Select Group">
+                                            <span ng-bind="$select.selected.name"></span>
+                                        </ui-select-match>
+                                        <ui-select-choices repeat="item in (groups | filter: $select.search) track by item.id">
+                                            <span ng-bind="item.name"></span>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+
+                                <div class="form-group">
+                                    <ui-select multiple  ng-model="email.receiver" ng-enabled="email.group" required>
+                                        <ui-select-match placeholder="Select person...">
+                                            
+                                            {{$item.username}}
+                                        </ui-select-match>
+                                        <ui-select-choices repeat="item in (users | filter: $select.search) track by item.id">
+                                            <span ng-bind="item.username"></span>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                                <div class="form-group">
+                                    <div class="">
+                                        <input type="text" id="single-msg-header" class="form-control" ng-model="email.msg_header" name="subject" placeholder="Subject"  required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="">
+                                        <textarea class="textarea" ng-model="email.msg_content" placeholder="Message" style="width: 100%; height: 180px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="">
+                                        <button type="submit" class=" btn btn-primary" id="sendEmail" ng-disabled="emailForm.$invalid" >Send <i class="fa fa-arrow-circle-right"></i></button>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="">
+                                        <button class="pull-right btn btn-danger" id="cancelEmail" ng-click="cancel()">Cancel<i class="fa fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+        </form>
+                    </div>
+            </div>
+       
+            <div role="tabpanel" class="tab-pane fade in" id="bulk_compose" style="">
+                <div class="row">
+                 <form class="form-horizontal" name="bulkEmailForm" ng-submit="submitBulkEmail()" novalidate>
+                    <section class="col-sm-8 connectedSortable">
+                        <!-- quick email widget -->
+                        <div class="box box-info">
+                            <div class="box-header">
+                                <div class="form-group">
+                                    <h3 class="box-title">Email</h3>
+                                    <!-- tools box -->
+                                    <!-- /. tools -->
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <div class="">
+                                        <input type="text" id="bulk-msg-header" class="form-control" ng-model="email.msg_header_bulk" name="subject1" placeholder="Subject"  required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="">
+                                        <textarea class="textarea" ng-model="email.msg_content_bulk" placeholder="Message" style="width: 100%; height: 180px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="">
+                                        <button type="submit" class=" btn btn-primary" id="sendEmail" ng-disabled="bulkEmailForm.$invalid"  >Send <i class="fa fa-arrow-circle-right"></i></button>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="">
+                                        <button class="pull-right btn btn-danger" id="cancelEmail"  ng-click="cancel()">Cancel<i class="fa fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="sidebar col-sm-3 connectedSortable">
+                        <div class=" box box-primary">
+                            <div class="box-header">
+                                <!-- tools box -->
+                                <!-- /. tools -->
+                                <h3 class="box-title">
+            Whom to send:
+            </h3>
+                            </div>
+                            <div class="box-body no-padding user-listing ">
+                                <ul class="sidebar-menu list-unstyled">
+                                    <li class="treeview" ng-repeat="program in email.programs">
+                                        <a class="link-toggle" href="#">
+                                            <i class="fa fa-plus-circle"></i>
+                                            <span>{{ program.program_name }}</span>
+                                        </a>
+                                        <ul class="user-list-sidebar list-unstyled">
+                                            <li ng-repeat="grade in program.sections">
+                                                <div class="checkbox">
+                                                    <a class="link-toggle" href="#">
+                                                        <i class="fa fa-plus-circle"></i>
+                                                        <span>{{grade.name}}</span>
+                                                    </a>
+                                                </div>
+                                                <ul class="user-list-sidebar list-unstyled">
+                                                    <li ng-repeat="section in grade.grade_sections">
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input ng-disabled="grade.selected" type="checkbox" ng-model="section.selected"> {{section.name}}
+                                                            </label>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="checkbox">
+                                                            <label class="checkbox">
+                                                                <input type="checkbox" ng-change="roleCheck(grade, grade.selected)" ng-checked="grade.selected" ng-model="grade.selected">All
+                                                            </label>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- /.box-body-->
+                        </div>
+                    </section>
+        </form>
+                </div>
+            </div>
+    </div>
+</div>

@@ -24,7 +24,8 @@
     {% endblock %}
 
     {% block angular %}
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+       
     {% endblock %}
 
   </head>
@@ -47,6 +48,9 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'about' %}">About</a>
+              </li>
+               <li class="nav-item">
+                <a class="nav-link" href="{% url 'user_email:email' %}">Email</a>
               </li>
             </ul>
 
@@ -81,7 +85,7 @@
       {% endif %}
 
       {% block content %}
-        <p>Use this document as a way to quick start any new project.</p>
+        <p>Email Application with AngularJS</p>
       {% endblock content %}
 
     </div> <!-- /container -->
